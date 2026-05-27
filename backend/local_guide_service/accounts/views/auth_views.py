@@ -1,0 +1,80 @@
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework import status
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.exceptions import TokenError
+
+from accounts.serializers.auth_serializers import SignUpSerializer, LoginSerializer, MeSerializer
+from accounts.services.auth_service import set_cookie_on_login, set_cookie_on_refresh
+
+
+@csrf_exempt
+@api_view(["POST"])
+@permission_classes([AllowAny])
+def sign_up(request):
+    serializer = SignUpSerializer(data=request.data)
+    if not serializer.is_valid():
+        return Response({"errors": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+    user = serializer.save()
+    return Response({"user_id": user.id}, status=status.HTTP_201_CREATED)
+
+
+@csrf_exempt
+@api_view(["POST"])
+@permission_classes([AllowAny])
+def login(request):
+    serializer = LoginSerializer(data=request.data)
+    if not serializer.is_valid():
+        return Response({"errors": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+    user = serializer.validated_data["user"]
+    refresh = RefreshToken.for_user(user)
+    return set_cookie_on_login(user, str(refresh.access_token), str(refresh))
+
+
+@api_view(["POST"])
+@permission_classes([AllowAny])
+def token_refresh(request):
+    refresh_token = request.COOKIES.get("refresh_token")
+
+    if not refresh_token:
+        return Response({"error": "refresh token이 없습니다."}, status=status.HTTP_401_UNAUTHORIZED)
+
+    try:
+        refresh = RefreshToken(refresh_token)
+        access_token = str(refresh.access_token)
+    except TokenError:
+        return Response({"error": "유효하지 않거나 만료된 refresh token입니다."}, status=status.HTTP_401_UNAUTHORIZED)
+
+    return set_cookie_on_refresh(access_token, refresh_token)
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def me(request):
+    serializer = MeSerializer(request.user)
+    return Response(serializer.data)
+
+
+class LogoutView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        refresh_token = request.COOKIES.get("refresh_token")
+        if not refresh_token:
+            return Response({"error": "refresh token이 없습니다."}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+        except Exception:
+            return Response({"error": "유효하지 않은 토큰입니다."}, status=status.HTTP_400_BAD_REQUEST)
+
+        response = Response({"detail": "로그아웃 성공"}, status=status.HTTP_200_OK)
+        response.delete_cookie("access_token")
+        response.delete_cookie("refresh_token")
+        return response

@@ -18,6 +18,8 @@ services:
   backend:
     build:
       context: ./backend/local_guide_service
+    volumes:
+      - ./backend/local_guide_service:/app
     environment:
       DB_NAME: local_guide_db
       DB_USER: local_guide_user
@@ -33,7 +35,7 @@ services:
         condition: service_healthy
     command: >
       sh -c "python manage.py migrate &&
-             gunicorn local_guide_service.wsgi:application --bind 0.0.0.0:8000"
+             python manage.py runserver 0.0.0.0:8000"
 
   frontend:
     build:
