@@ -2,9 +2,9 @@ services:
   db:
     image: postgres:16-alpine
     environment:
-      POSTGRES_DB: local_guide_db
-      POSTGRES_USER: local_guide_user
-      POSTGRES_PASSWORD: local_guide_password
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
@@ -18,14 +18,16 @@ services:
   backend:
     build:
       context: ./backend/local_guide_service
+    volumes:
+      - ./backend/local_guide_service:/app
     environment:
-      DB_NAME: local_guide_db
-      DB_USER: local_guide_user
-      DB_PASSWORD: local_guide_password
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
       DB_HOST: db
-      DB_PORT: 5432
-      DJANGO_SECRET_KEY: "django-insecure-8ft2*$$n7i=z&go(0jcq-)9jvbdtont*)jyoh9eslnpuwx@73@o"
-      DEBUG: "True"
+      DB_PORT: ${DB_PORT}
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+      DEBUG: ${DEBUG}
     ports:
       - "8000:8000"
     depends_on:
@@ -33,7 +35,7 @@ services:
         condition: service_healthy
     command: >
       sh -c "python manage.py migrate &&
-             gunicorn local_guide_service.wsgi:application --bind 0.0.0.0:8000"
+             python manage.py runserver 0.0.0.0:8000"
 
   frontend:
     build:
