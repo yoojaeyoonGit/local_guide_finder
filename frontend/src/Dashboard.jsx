@@ -64,23 +64,23 @@ function Dashboard() {
       <div className="package-container">
 
         <div
-  className="package-card"
-  onClick={() => navigate("/package-edit")}
->
-  <img
-    src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?q=80&w=1200&auto=format&fit=crop"
-    alt="travel"
-  />
+          className="package-card"
+          onClick={() => navigate("/package-edit")}
+        >
+          <img
+            src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?q=80&w=1200&auto=format&fit=crop"
+            alt="travel"
+          />
 
-  <div className="package-content">
-    <h2>베이징 관광 패키지</h2>
-    <p>자금성 · 이화원 · 만리장성</p>
-    <span>중국 베이징</span><br />
-    <span>⭐ 4.9</span>
+          <div className="package-content">
+            <h2>베이징 관광 패키지</h2>
+            <p>자금성 · 이화원 · 만리장성</p>
+            <span>중국 베이징</span><br />
+            <span>⭐ 4.9</span>
 
-    <h3>$53</h3>
-  </div>
-</div>
+            <h3>$53</h3>
+          </div>
+        </div>
 
         <div className="package-card">
           <img
@@ -91,7 +91,7 @@ function Dashboard() {
           <div className="package-content">
             <h2>양쯔강 크루즈</h2>
             <p>충칭 · 이창 · 상해</p>
-            <span>중국 충칭</span><br/>
+            <span>중국 충칭</span><br />
             <span>⭐ 4.5</span>
 
             <h3>$77</h3>
