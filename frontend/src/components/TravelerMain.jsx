@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import HeaderIcons from './HeaderIcons';
 import './TravelerMain.css';
 
 const TravelerMain = () => {
@@ -18,10 +19,7 @@ const TravelerMain = () => {
         <button className="nav-btn" onClick={() => navigate('/guide')}>가이드</button>
       </div>
 
-      <div className="header-right-icons">
-        <div className="profile-icon" onClick={() => navigate('/profile', { state: { isGuide: false } })}>👤</div>
-        <div className="settings-icon">⚙️</div>
-      </div>
+      <HeaderIcons isGuide={false} />
 
       <h1 className="main-logo">GuideMe</h1>
       <p className="main-slogan">누구나 가이드가 될 수 있다</p>
