@@ -1,0 +1,144 @@
+board-detail-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  font-family: 'Malgun Gothic', sans-serif;
+  position: relative;
+  background-color: white;
+}
+
+.detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.back-arrow {
+  font-size: 24px;
+  cursor: pointer;
+  color: #007bff;
+}
+
+.edit-badge {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  padding: 2px 12px;
+  font-size: 12px;
+}
+
+/* 이미지 갤러리 */
+.image-gallery {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+.gallery-item img {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* 본문 섹션 */
+.content-section, .comment-section {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.label {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.content-title {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 10px;
+}
+
+.text-box {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* 댓글 영역 */
+.comment-input-wrapper {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.comment-input-wrapper textarea {
+  flex: 1;
+  height: 60px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  resize: none;
+}
+
+.btn-comment-submit {
+  width: 80px;
+  background-color: #e0e0e0;
+  border: none;
+  cursor: pointer;
+}
+
+.comment-item {
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+}
+
+.comment-item p {
+  font-size: 13px;
+  margin: 5px 0 0 0;
+}
+
+/* 하단 버튼 */
+.detail-footer-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-like {
+  flex: 1;
+  padding: 12px;
+  background-color: #f0f0f0;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.btn-chat-start {
+  flex: 2;
+  padding: 12px;
+  background-color: #e0e0e0;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.floating-btn {
+  position: fixed;
+  bottom: 30px;
+  right: calc(50% - 320px);
+  width: 40px;
+  height: 40px;
+  background-color: #ffcc00;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
