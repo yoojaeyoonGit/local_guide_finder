@@ -1,5 +1,10 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import { AuthProvider } from './context/AuthContext';
+import PrivateRoute from './components/PrivateRoute';
+import Layout from './components/Layout';
+import Login from './Login';
+import SignUp from './SignUp';
 
 // main 브랜치 컴포넌트
 import TravelerMain from './components/TravelerMain';
@@ -18,27 +23,26 @@ import Pay from './Pay';
 import Refund from './Refund';
 
 const AppContent = () => {
-  const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   return (
     <div className="min-h-screen bg-gray-50">
       <Routes>
-        {/* main 라우트 */}
-        <Route path="/" element={<TravelerMain />} />
-        <Route path="/guide" element={<GuideMain />} />
-        <Route path="/profile" element={<ProfileEdit />} />
-        <Route path="/board" element={<BoardPage />} />
-        <Route path="/chat" element={<ChatPage />} />
-        <Route path="/Product-selection" element={<ProductSelection />} />
-        <Route path="/board/detail" element={<BoardDetail />} />
+        {/* 공개 라우트 */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
 
-        {/* feature/frontend-ui 라우트 */}
-        <Route path="/package-edit" element={<PackageEdit />} />
-        <Route path="/package-edit2" element={<PackageEdit2 />} />
-        <Route path="/package-edit3" element={<PackageEdit3 />} />
-        <Route path="/pay" element={<Pay />} />
-        <Route path="/refund" element={<Refund />} />
+        {/* 보호 라우트 */}
+        <Route path="/" element={<PrivateRoute><Layout><TravelerMain /></Layout></PrivateRoute>} />
+        <Route path="/guide" element={<PrivateRoute><Layout><GuideMain /></Layout></PrivateRoute>} />
+        <Route path="/profile" element={<PrivateRoute><Layout><ProfileEdit /></Layout></PrivateRoute>} />
+        <Route path="/board" element={<PrivateRoute><Layout><BoardPage /></Layout></PrivateRoute>} />
+        <Route path="/chat" element={<PrivateRoute><Layout><ChatPage /></Layout></PrivateRoute>} />
+        <Route path="/Product-selection" element={<PrivateRoute><Layout><ProductSelection /></Layout></PrivateRoute>} />
+        <Route path="/board/detail" element={<PrivateRoute><Layout><BoardDetail /></Layout></PrivateRoute>} />
+        <Route path="/package-edit" element={<PrivateRoute><Layout><PackageEdit /></Layout></PrivateRoute>} />
+        <Route path="/package-edit2" element={<PrivateRoute><Layout><PackageEdit2 /></Layout></PrivateRoute>} />
+        <Route path="/package-edit3" element={<PrivateRoute><Layout><PackageEdit3 /></Layout></PrivateRoute>} />
+        <Route path="/pay" element={<PrivateRoute><Layout><Pay /></Layout></PrivateRoute>} />
+        <Route path="/refund" element={<PrivateRoute><Layout><Refund /></Layout></PrivateRoute>} />
       </Routes>
     </div>
   );
@@ -47,7 +51,9 @@ const AppContent = () => {
 function App() {
   return (
     <Router>
-      <AppContent />
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
     </Router>
   );
 }

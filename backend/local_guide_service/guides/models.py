@@ -26,6 +26,8 @@ class GuideProduct(models.Model):
     city = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     thumbnail_url = models.CharField(max_length=500, null=True, blank=True)
+    travel_start_date = models.DateField(null=True, blank=True)
+    travel_end_date = models.DateField(null=True, blank=True)
     average_rating = models.DecimalField(max_digits=3, decimal_places=2, default=0.00)
     review_count = models.IntegerField(default=0)
     is_active = models.BooleanField(default=True)

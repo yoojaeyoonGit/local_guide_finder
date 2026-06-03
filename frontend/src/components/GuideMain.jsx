@@ -1,5 +1,5 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import HeaderIcons from './HeaderIcons';
 import './GuideMain.css';
 
 const GuideMain = () => {
@@ -14,10 +14,7 @@ const GuideMain = () => {
       </div>
 
       {/* 우측 상단 아이콘 */}
-      <div className="header-right-icons">
-        <div className="profile-icon" onClick={() => navigate('/profile', { state: { isGuide: true } })}>👤</div>
-        <div className="settings-icon">⚙️</div>
-      </div>
+      <HeaderIcons isGuide={true} />
 
       <h1 className="main-logo">GuideMe</h1>
       <p className="main-slogan">누구나 가이드가 될 수 있다</p>

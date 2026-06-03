@@ -28,6 +28,11 @@ services:
       DB_PORT: ${DB_PORT}
       DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
       DEBUG: ${DEBUG}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS}
+      DJANGO_SUPERUSER_USERNAME: ${DJANGO_SUPERUSER_USERNAME}
+      DJANGO_SUPERUSER_EMAIL: ${DJANGO_SUPERUSER_EMAIL}
+      DJANGO_SUPERUSER_PASSWORD: ${DJANGO_SUPERUSER_PASSWORD}
+      DJANGO_SUPERUSER_NAME: ${DJANGO_SUPERUSER_NAME}
     ports:
       - "8000:8000"
     depends_on:
@@ -35,11 +40,15 @@ services:
         condition: service_healthy
     command: >
       sh -c "python manage.py migrate &&
+             python manage.py createsuperuser --noinput || true &&
              python manage.py runserver 0.0.0.0:8000"
 
   frontend:
     build:
       context: ./frontend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
     ports:
       - "5173:5173"
     depends_on:

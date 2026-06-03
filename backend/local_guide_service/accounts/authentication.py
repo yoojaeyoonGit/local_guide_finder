@@ -19,6 +19,6 @@ class CookieJWTAuthentication(BaseAuthentication):
             payload = AccessToken(access_token)
             user = User.objects.get(id=payload["user_id"])
         except Exception:
-            raise AuthenticationFailed("토큰이 만료되었거나 유효하지 않습니다.")
+            return None
 
         return user, None

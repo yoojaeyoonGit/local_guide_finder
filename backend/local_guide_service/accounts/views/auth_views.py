@@ -75,6 +75,6 @@ class LogoutView(APIView):
             return Response({"error": "유효하지 않은 토큰입니다."}, status=status.HTTP_400_BAD_REQUEST)
 
         response = Response({"detail": "로그아웃 성공"}, status=status.HTTP_200_OK)
-        response.delete_cookie("access_token")
-        response.delete_cookie("refresh_token")
+        response.delete_cookie("access_token", samesite="Lax")
+        response.delete_cookie("refresh_token", samesite="Strict")
         return response
