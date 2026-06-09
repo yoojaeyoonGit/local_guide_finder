@@ -39,3 +39,31 @@ class MessageAttachment(models.Model):
 
     class Meta:
         db_table = "message_attachments"
+
+
+class DirectChatRoom(models.Model):
+    user1 = models.ForeignKey(User, on_delete=models.CASCADE, related_name="direct_rooms_as_user1")
+    user2 = models.ForeignKey(User, on_delete=models.CASCADE, related_name="direct_rooms_as_user2")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "direct_chat_rooms"
+        unique_together = ("user1", "user2")
+
+    def __str__(self):
+        return f"DM: {self.user1.name} <> {self.user2.name}"
+
+
+class DirectMessage(models.Model):
+    room = models.ForeignKey(DirectChatRoom, on_delete=models.CASCADE, related_name="messages")
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sent_direct_messages")
+    content = models.TextField()
+    is_read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "direct_messages"
+        ordering = ["created_at"]
+
+    def __str__(self):
+        return f"[DM:{self.room_id}] {self.sender.name}: {self.content[:30]}"
