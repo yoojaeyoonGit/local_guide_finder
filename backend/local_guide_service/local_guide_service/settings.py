@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "reports",
     "notifications",
     "payments",
+    "board",
 ]
 
 MIDDLEWARE = [
