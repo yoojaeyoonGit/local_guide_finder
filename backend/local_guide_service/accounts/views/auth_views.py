@@ -1,5 +1,6 @@
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework import status
+from drf_spectacular.utils import extend_schema, inline_serializer
+from rest_framework import serializers as s, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
@@ -11,6 +12,12 @@ from accounts.serializers.auth_serializers import SignUpSerializer, LoginSeriali
 from accounts.services.auth_service import set_cookie_on_login, set_cookie_on_refresh
 
 
+@extend_schema(
+    tags=["인증"],
+    summary="회원가입",
+    request=SignUpSerializer,
+    responses={201: inline_serializer("SignUpResponse", {"user_id": s.UUIDField()})},
+)
 @csrf_exempt
 @api_view(["POST"])
 @permission_classes([AllowAny])
@@ -23,6 +30,12 @@ def sign_up(request):
     return Response({"user_id": user.id}, status=status.HTTP_201_CREATED)
 
 
+@extend_schema(
+    tags=["인증"],
+    summary="로그인",
+    request=LoginSerializer,
+    responses={200: MeSerializer},
+)
 @csrf_exempt
 @api_view(["POST"])
 @permission_classes([AllowAny])
@@ -36,6 +49,12 @@ def login(request):
     return set_cookie_on_login(user, str(refresh.access_token), str(refresh))
 
 
+@extend_schema(
+    tags=["인증"],
+    summary="토큰 갱신",
+    request=None,
+    responses={200: inline_serializer("TokenRefreshResponse", {"access_token": s.CharField()})},
+)
 @api_view(["POST"])
 @permission_classes([AllowAny])
 def token_refresh(request):
@@ -53,6 +72,11 @@ def token_refresh(request):
     return set_cookie_on_refresh(access_token, refresh_token)
 
 
+@extend_schema(
+    tags=["인증"],
+    summary="내 정보 조회",
+    responses={200: MeSerializer},
+)
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def me(request):
@@ -63,6 +87,12 @@ def me(request):
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
 
+    @extend_schema(
+        tags=["인증"],
+        summary="로그아웃",
+        request=None,
+        responses={200: inline_serializer("LogoutResponse", {"detail": s.CharField()})},
+    )
     def post(self, request):
         refresh_token = request.COOKIES.get("refresh_token")
         if not refresh_token:
