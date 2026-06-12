@@ -1,6 +1,9 @@
 import './Refund.css'
+import { useNavigate } from "react-router-dom";
 
 function Refund() {
+  const navigate = useNavigate();
+
   return (
     <div className="payment-page">
 
@@ -15,11 +18,22 @@ function Refund() {
       </div>
 
       <div className="button-group">
-        <button className="refund-btn">
-          환불하기
-        </button>
+        <button
+  className="refund-btn"
+  onClick={() => {
+    const ok = window.confirm("환불되었습니다.");
+    if (ok) {
+      navigate("/package-edit2");
+    }
+  }}
+>
+  환불하기
+</button>
 
-        <button className="cancel-btn">
+        <button
+          className="cancel-btn"
+          onClick={() => navigate("/package-edit3")}
+        >
           취소
         </button>
       </div>
