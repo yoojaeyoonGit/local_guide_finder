@@ -1,3 +1,4 @@
+from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -9,6 +10,12 @@ from guides.models import GuideProfile
 from guides.serializers.guide_serializers import GuideProfileCreateSerializer, GuideProfileSerializer
 
 
+@extend_schema(
+    tags=["가이드"],
+    summary="가이드 등록",
+    request=GuideProfileCreateSerializer,
+    responses={201: GuideProfileSerializer},
+)
 @api_view(["POST"])
 @permission_classes([IsTraveler])
 def register_as_guide(request):
@@ -28,6 +35,12 @@ def register_as_guide(request):
     return Response(GuideProfileSerializer(profile).data, status=status.HTTP_201_CREATED)
 
 
+@extend_schema(
+    tags=["가이드"],
+    summary="내 가이드 프로필 조회/수정",
+    request=GuideProfileCreateSerializer,
+    responses={200: GuideProfileSerializer},
+)
 @api_view(["GET", "PATCH"])
 @permission_classes([IsGuide])
 def my_guide_profile(request):

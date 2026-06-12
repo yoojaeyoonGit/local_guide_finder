@@ -116,6 +116,13 @@ SPECTACULAR_SETTINGS = {
             }
         }
     },
+    "TAGS": [
+        {"name": "인증", "description": "회원가입, 로그인, 토큰, 로그아웃"},
+        {"name": "가이드", "description": "가이드 등록 및 프로필 관리"},
+        {"name": "상품", "description": "가이드 상품 CRUD"},
+        {"name": "게시판", "description": "게시글 CRUD, 좋아요"},
+        {"name": "댓글", "description": "댓글 CRUD"},
+    ],
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -124,6 +131,13 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
+
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_PUBLISHABLE_KEY = os.getenv("SUPABASE_PUBLISHABLE_KEY")
+SUPABASE_SECRET_KEY = os.getenv("SUPABASE_SECRET_KEY")
+SUPABASE_SERVICE_ROLE_KEY = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
+SUPABASE_BUCKET = os.getenv("SUPABASE_BUCKET")
+
 
 LANGUAGE_CODE = "ko-kr"
 TIME_ZONE = "Asia/Seoul"
