@@ -1,12 +1,16 @@
 import './PackageEdit.css'
+import { useNavigate } from 'react-router-dom'
+
 
 function PackageEdit() {
+  const navigate = useNavigate();
   return (
     <div className="page">
+      <button className="back-btn" onClick={() => navigate(-1)}>←</button>  
 
       <div className="top-header">
-        <button className="back-btn" onClick={() => navigate(-1)}>←</button>
-        <h1>베이징 관광 패키지</h1>
+        <h1 className="main-logo">베이징 관광 패키지</h1>
+        
       </div>
 
       <div className="package-box">
@@ -50,7 +54,7 @@ function PackageEdit() {
           />
         </div>
 
-        <button className="save-btn" onClick={() => alert('변경사항 저장되었습니다.')}>
+        <button className="save-btn">
           업데이트 저장
         </button>
 

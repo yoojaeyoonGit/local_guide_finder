@@ -5,6 +5,7 @@ function Dashboard() {
   const navigate = useNavigate();
   return (
     <div className="dashboard">
+      <button className="back-btn" onClick={() => navigate(-1)}>←</button>
 
       <div className="profile-box">
         <div className="profile-left">
@@ -56,9 +57,11 @@ function Dashboard() {
 
       <div className="package-header">
         <h1>상품 패키지 관리</h1>
-       <button onClick={() => alert('새 상품이 추가되었습니다.')}>
+       <button onClick={() => navigate('/newproduct')}>
   + 새 상품
 </button>
+
+
       </div>
 
       <input
