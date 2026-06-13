@@ -63,7 +63,7 @@ const ProductSelection = () => {
           <div 
             key={product.id} 
             className="product-card-item" 
-            onClick={() => navigate('/chat')}
+            onClick={() => navigate('/package-edit2')}
           >
             <div className="card-img-wrapper">
               <img src={product.img} alt={product.title} />
