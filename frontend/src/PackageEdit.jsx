@@ -5,6 +5,7 @@ function PackageEdit() {
     <div className="page">
 
       <div className="top-header">
+        <button className="back-btn" onClick={() => navigate(-1)}>←</button>
         <h1>베이징 관광 패키지</h1>
         <button>편집</button>
       </div>

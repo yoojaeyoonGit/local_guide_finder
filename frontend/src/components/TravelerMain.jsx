@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import HeaderIcons from './HeaderIcons';
 import './TravelerMain.css';
@@ -9,8 +9,18 @@ const TravelerMain = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState('미국');
 
+ 
+
+  const [authData, setAuthData] = useState(null); // API 데이터 상태
+
   const countries = ['미국', '일본', '중국', '베트남', '태국'];
   const regions = ['LA', '뉴욕', '시카고', '샌프란시스코', '시애틀'];
+
+
+
+
+
+  
 
   return (
     <div className="traveler-main">
@@ -26,6 +36,7 @@ const TravelerMain = () => {
       
       <div className="content-grid">
         {/* 관광 상품 찾기 */}
+        {/* json 넣어야하는 부분 */}
         <div className="section-card">
           <div className="section-header blue-header">관광 상품 찾기</div>
           <div className="section-body">
@@ -33,6 +44,10 @@ const TravelerMain = () => {
             <div className="filter-select" onClick={() => setIsModalOpen(true)} style={{cursor: 'pointer'}}>
               국가/나라 선택 ▼
             </div>
+
+
+
+
             <div className="inner-card product-card" onClick={() => navigate('/product-selection')}>
               <img src="https://picsum.photos/200" alt="product" className="img-placeholder" />
               <div className="card-info">
@@ -45,6 +60,7 @@ const TravelerMain = () => {
         </div>
 
         {/* 예약/진행된 매칭 */}
+        {/* json 넣어야하는 부분 */}
         <div className="section-card">
           <div className="section-header green-header">예약/진행된 매칭</div>
           <div className="section-body">
@@ -57,8 +73,8 @@ const TravelerMain = () => {
                 <div className="matching-content">
                   <img src="https://picsum.photos/200" alt="guide" className="thumb-img" />
                   <div>
-                    <strong>도쿄 여행</strong>
-                    <p>가이드: 김찬슬</p>
+                    <strong>여행 이름</strong>
+                    <p>가이드: 이름</p>
                   </div>
                 </div>
               </div>

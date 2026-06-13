@@ -24,7 +24,11 @@ const GuideMain = () => {
         <div className="guide-section-card">
           <div className="section-header dark-gray">내가 올려놓은 가이드 상품</div>
           <div className="section-body">
-            <button className="studio-btn">가이드 스튜디오 이동</button>
+            
+            {/* 가이드 스튜디오 이동 버튼 */}
+            <button className="studio-btn" onClick={() => navigate('/dashboard')}>가이드 스튜디오 이동</button>
+
+
             <div className="inner-product-card">
               <div className="product-info-top">
                 <img src="https://picsum.photos/200" alt="product" className="rect-img" />
@@ -33,7 +37,7 @@ const GuideMain = () => {
                   <p className="prod-price">$53</p>
                 </div>
               </div>
-              <button className="detail-view-btn">상세 페이지 이동</button>
+              <button className="detail-view-btn" onClick={() => navigate('/package-edit')}>상세 페이지 이동</button>
             </div>
           </div>
 

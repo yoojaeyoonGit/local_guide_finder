@@ -21,6 +21,8 @@ import PackageEdit2 from './PackageEdit2';
 import PackageEdit3 from './PackageEdit3';
 import Pay from './Pay';
 import Refund from './Refund';
+import DashBoard from './DashBoard';
+
 
 const AppContent = () => {
   return (
@@ -43,6 +45,9 @@ const AppContent = () => {
         <Route path="/package-edit3" element={<PrivateRoute><Layout><PackageEdit3 /></Layout></PrivateRoute>} />
         <Route path="/pay" element={<PrivateRoute><Layout><Pay /></Layout></PrivateRoute>} />
         <Route path="/refund" element={<PrivateRoute><Layout><Refund /></Layout></PrivateRoute>} />
+        <Route path="/dashboard" element={<PrivateRoute><Layout><DashBoard /></Layout></PrivateRoute>} />
+
+        
       </Routes>
     </div>
   );
