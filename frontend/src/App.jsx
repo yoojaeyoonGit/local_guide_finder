@@ -25,7 +25,6 @@ const AppContent = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Routes>
-
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
 
@@ -36,19 +35,12 @@ const AppContent = () => {
         <Route path="/chat" element={<PrivateRoute><Layout><ChatPage /></Layout></PrivateRoute>} />
         <Route path="/Product-selection" element={<PrivateRoute><Layout><ProductSelection /></Layout></PrivateRoute>} />
         <Route path="/board/detail" element={<PrivateRoute><Layout><BoardDetail /></Layout></PrivateRoute>} />
-
         <Route path="/package-edit" element={<PrivateRoute><Layout><PackageEdit /></Layout></PrivateRoute>} />
         <Route path="/package-edit2" element={<PrivateRoute><Layout><PackageEdit2 /></Layout></PrivateRoute>} />
         <Route path="/package-edit3" element={<PrivateRoute><Layout><PackageEdit3 /></Layout></PrivateRoute>} />
         <Route path="/pay" element={<PrivateRoute><Layout><Pay /></Layout></PrivateRoute>} />
         <Route path="/refund" element={<PrivateRoute><Layout><Refund /></Layout></PrivateRoute>} />
-        <Route
-  path="/dashboard"
-  element={<Dashboard />}
-/>
-        
-        
-
+        <Route path="/dashboard" element={<PrivateRoute><Layout><Dashboard /></Layout></PrivateRoute>} />
       </Routes>
     </div>
   );

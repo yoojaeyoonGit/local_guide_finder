@@ -5,6 +5,8 @@ import './BoardDetail.css';
 const BoardDetail = () => {
   const navigate = useNavigate();
 
+  
+
   return (
     <div className="board-detail-container">
       {/* 상단 헤더: 제목과 편집 버튼 */}

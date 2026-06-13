@@ -1,14 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { apiFetch } from '../api/client';
 import './BoardPage.css';
 
 const BoardPage = () => {
+
   const navigate = useNavigate();
-  const posts = [
-    { id: 1, title: '25일 가이드 모집합니다', desc: '간단하게 지역 소개해 주실 가이드 모집합니다', date: '2026.05.30' },
-    { id: 2, title: '식당 함께 갈 분 모집합니다', desc: '현지 맛집 같이 가실 분 구해요', date: '2026.05.29' },
-    { id: 3, title: '야경 투어 가이드 구함', desc: '저녁 7시 이후 투어 가능하신 분', date: '2026.05.28' }
-  ];
+
+  const [boardData, setBoardData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const fetchBoard = async () => {
+    try {
+      const response = await apiFetch('/api/v1/board/posts/');
+
+      const jsonData = await response.json();
+      console.log(jsonData);
+
+      setBoardData(jsonData);
+      setIsLoading(false);
+
+    } catch (error) {
+      console.error("데이터를 가져오는 중 오류 발생:", error);
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchBoard();
+  }, []);
+
+  if (isLoading) {
+    return <div className="loading">로딩 중...</div>;
+  }
+
+  if (!boardData) {
+    return <div className="error">게시글을 불러올 수 없습니다.</div>;
+  }
 
   return (
     <div className="board-container">
@@ -19,11 +47,10 @@ const BoardPage = () => {
       </div>
 
       <div className="post-list">
-        {posts.map(post => (
-          /* onClick 부분을 App.jsx의 경로인 /board/detail로 연결했습니다 */
-          <div 
-            key={post.id} 
-            className="post-item" 
+        {boardData.map(post => (
+          <div
+            key={post.id}
+            className="post-item"
             onClick={() => navigate('/board/detail')}
           >
             <div className="post-content">
