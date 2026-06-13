@@ -9,7 +9,6 @@ function PackageEdit3() {
       <div className="top-header">
         <button className="back-btn" onClick={() => navigate(-1)}>←</button>
         <h1>베이징 관광 패키지</h1>
-        <button>편집</button>
       </div>
 
       <div className="package-box">
@@ -53,9 +52,12 @@ function PackageEdit3() {
           />
         </div>
 
-        <button className="Chat">
-          채팅하기
-        </button>
+    <button
+  className="Chat"
+  onClick={() => navigate("/chat")}
+>
+  채팅하기
+</button>
 
        <button
   className="Cancle"

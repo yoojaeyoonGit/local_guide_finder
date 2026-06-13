@@ -48,7 +48,7 @@ const BoardDetail = () => {
         <p className="label">댓글</p>
         <div className="comment-input-wrapper">
           <textarea placeholder="댓글 작성하는 textarea"></textarea>
-          <button className="btn-comment-submit">등록</button>
+          <button className="btn-comment-submit" onClick={() => alert('댓글이 등록되었습니다.')}>등록</button>
         </div>
         <div className="comment-list">
           <div className="comment-item">

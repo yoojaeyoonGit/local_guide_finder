@@ -7,7 +7,6 @@ function PackageEdit() {
       <div className="top-header">
         <button className="back-btn" onClick={() => navigate(-1)}>←</button>
         <h1>베이징 관광 패키지</h1>
-        <button>편집</button>
       </div>
 
       <div className="package-box">
@@ -51,7 +50,7 @@ function PackageEdit() {
           />
         </div>
 
-        <button className="save-btn">
+        <button className="save-btn" onClick={() => alert('변경사항 저장되었습니다.')}>
           업데이트 저장
         </button>
 

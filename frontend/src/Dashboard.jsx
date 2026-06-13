@@ -8,7 +8,9 @@ function Dashboard() {
 
       <div className="profile-box">
         <div className="profile-left">
-          <div className="profile-image"></div>
+         <div className="profile-image-circle">
+  <img src="https://picsum.photos/200" alt="profile" />
+</div>
 
           <div>
             <h2>KYHS001</h2>
@@ -21,7 +23,9 @@ function Dashboard() {
           </div>
         </div>
 
-        <button>수정</button>
+        <button onClick={() => navigate("/profile")}>
+  수정
+</button>
       </div>
 
       <h1>이번 달 통계</h1>
@@ -52,7 +56,9 @@ function Dashboard() {
 
       <div className="package-header">
         <h1>상품 패키지 관리</h1>
-        <button>+ 새 상품</button>
+       <button onClick={() => alert('새 상품이 추가되었습니다.')}>
+  + 새 상품
+</button>
       </div>
 
       <input
