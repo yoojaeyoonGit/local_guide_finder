@@ -20,6 +20,7 @@ import PackageEdit3 from './PackageEdit3';
 import Pay from './Pay';
 import Refund from './Refund';
 import Dashboard from './Dashboard';
+import NewProduct from './components/NewProduct';
 
 const AppContent = () => {
   return (
@@ -34,13 +35,15 @@ const AppContent = () => {
         <Route path="/board" element={<PrivateRoute><Layout><BoardPage /></Layout></PrivateRoute>} />
         <Route path="/chat" element={<PrivateRoute><Layout><ChatPage /></Layout></PrivateRoute>} />
         <Route path="/Product-selection" element={<PrivateRoute><Layout><ProductSelection /></Layout></PrivateRoute>} />
-        <Route path="/board/detail" element={<PrivateRoute><Layout><BoardDetail /></Layout></PrivateRoute>} />
+        <Route path="/board/detail/:id" element={<PrivateRoute><Layout><BoardDetail /></Layout></PrivateRoute>} />
         <Route path="/package-edit" element={<PrivateRoute><Layout><PackageEdit /></Layout></PrivateRoute>} />
-        <Route path="/package-edit2" element={<PrivateRoute><Layout><PackageEdit2 /></Layout></PrivateRoute>} />
+        <Route path="/package-edit2/:id" element={<PrivateRoute><Layout><PackageEdit2 /></Layout></PrivateRoute>} />
         <Route path="/package-edit3" element={<PrivateRoute><Layout><PackageEdit3 /></Layout></PrivateRoute>} />
         <Route path="/pay" element={<PrivateRoute><Layout><Pay /></Layout></PrivateRoute>} />
         <Route path="/refund" element={<PrivateRoute><Layout><Refund /></Layout></PrivateRoute>} />
         <Route path="/dashboard" element={<PrivateRoute><Layout><Dashboard /></Layout></PrivateRoute>} />
+        
+        <Route path="/NewProduct" element={<PrivateRoute><Layout><NewProduct /></Layout></PrivateRoute>} />
       </Routes>
     </div>
   );
